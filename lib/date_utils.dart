@@ -16,23 +16,23 @@ class Utils {
   static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
 
   static const List<String> weekdays = const [
+    "日",
     "一",
     "二",
     "三",
     "四",
     "五",
-    "六",
-    "日"
+    "六"
   ];
 
   /// The list of days in a given month
   static List<DateTime> daysInMonth(DateTime month) {
     var first = firstDayOfMonth(month);
-    var daysBefore = first.weekday - 1;
+    var daysBefore = first.weekday;
     var firstToDisplay = first.subtract(new Duration(days: daysBefore));
     var last = Utils.lastDayOfMonth(month);
 
-    var daysAfter = 7 - last.weekday + 1;
+    var daysAfter = 7 - last.weekday ;
 
     // If the last day is sunday (7) the entire week must be rendered
     if (daysAfter == 0) {
@@ -62,7 +62,7 @@ class Utils {
 
     /// Weekday is on a 1-7 scale Monday - Sunday,
     /// This Calendar works from Sunday - Monday
-    var decreaseNum = (day.weekday - 1) % 7;
+    var decreaseNum = day.weekday % 7;
     return day.subtract(new Duration(days: decreaseNum));
   }
 
@@ -73,7 +73,7 @@ class Utils {
 
     /// Weekday is on a 1-7 scale Monday - Sunday,
     /// This Calendar's Week starts on Sunday
-    var increaseNum = (day.weekday - 1) % 7;
+    var increaseNum = day.weekday % 7;
     return day.add(new Duration(days: 7 - increaseNum));
   }
 
